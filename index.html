@@ -2,153 +2,223 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ink Streetwear</title>
   <style>
+    /* Fuentes urbanas y estilos */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap');
+
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Roboto', sans-serif;
       background-color: #121212;
-      color: #f2f2f2;
+      color: #eee;
+      scroll-behavior: smooth;
     }
     header {
-      background: linear-gradient(90deg, #e6005c, #ff0055);
-      padding: 30px 20px;
+      background: linear-gradient(90deg, #ff0055, #e6007e);
+      padding: 40px 20px;
       text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 3px;
+      box-shadow: 0 5px 15px #e6007e88;
     }
     header h1 {
       margin: 0;
-      font-size: 3rem;
+      font-size: 3.8rem;
       color: #fff;
+      text-shadow: 0 0 10px #ff0055cc;
     }
     header p {
       font-style: italic;
-      font-size: 1.2rem;
-      color: #fdd;
+      font-size: 1.4rem;
+      color: #ff77aa;
+      margin-top: 5px;
+      text-shadow: 0 0 8px #e6007eaa;
     }
     nav {
-      background-color: #222;
+      background-color: #1e1e1e;
       text-align: center;
-      padding: 10px 0;
+      padding: 15px 0;
+      box-shadow: inset 0 -2px 3px #ff0055bb;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
     nav a {
-      color: #fff;
-      margin: 0 15px;
+      color: #ff77aa;
+      margin: 0 18px;
       text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+      text-transform: uppercase;
     }
     nav a:hover {
-      color: #e6005c;
+      color: #fff;
+      text-shadow: 0 0 8px #ff0055cc;
     }
     section {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 0 20px;
     }
     section h2 {
-      color: #e6005c;
-      border-bottom: 2px solid #e6005c;
-      padding-bottom: 10px;
+      color: #ff0055;
+      border-bottom: 3px solid #ff0055;
+      padding-bottom: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 6px #e6007eaa;
+    }
+    section p {
+      line-height: 1.6;
+      font-size: 1.1rem;
+      color: #ccc;
     }
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
+      gap: 25px;
+      margin-top: 25px;
     }
     .product {
-      background-color: #1f1f1f;
+      background-color: #222222dd;
       padding: 20px;
-      text-align: center;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 6px 15px #ff005533;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .product:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 12px 20px #ff0055bb;
     }
     .product img {
       width: 100%;
       border-radius: 10px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 10px #e6007e99;
     }
     .product h3 {
-      margin: 10px 0 5px;
-      color: #e6005c;
+      margin: 0 0 12px;
+      color: #ff0055;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      text-shadow: 0 0 4px #e6007eaa;
     }
     .product button {
-      margin-top: 10px;
-      background-color: #e6005c;
+      background-color: #ff0055;
       border: none;
-      padding: 10px 15px;
+      padding: 12px 20px;
       color: white;
-      font-weight: bold;
-      border-radius: 5px;
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      border-radius: 8px;
       cursor: pointer;
+      box-shadow: 0 3px 6px #e6007e88;
+      transition: background-color 0.3s ease;
     }
     .product button:hover {
-      background-color: #ff3366;
+      background-color: #e6007e;
+      box-shadow: 0 6px 15px #ff0055cc;
+    }
+    form label, form select, form input {
+      display: block;
+      width: 100%;
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: #ff77aa;
+    }
+    form select, form input[type="color"], form input[type="file"], form input[type="text"], form input[type="email"], form input[type="tel"] {
+      background-color: #222;
+      border: none;
+      border-radius: 6px;
+      color: #eee;
+      padding: 10px;
+      font-size: 1rem;
+      box-shadow: inset 0 0 8px #ff005599;
+      transition: box-shadow 0.3s ease;
+    }
+    form select:hover, form input[type="color"]:hover, form input[type="file"]:hover, form input[type="text"]:hover, form input[type="email"]:hover, form input[type="tel"]:hover {
+      box-shadow: inset 0 0 12px #ff0055cc;
+    }
+    form button {
+      background-color: #ff0055;
+      border: none;
+      padding: 14px 25px;
+      color: white;
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px #e6007eaa;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+    form button:hover {
+      background-color: #e6007e;
+      box-shadow: 0 7px 20px #ff0055cc;
     }
     #cart {
-      background-color: #1f1f1f;
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 30px;
-    }
-    footer {
-      background-color: #1a1a1a;
-      text-align: center;
+      background-color: #222222dd;
+      border-radius: 12px;
       padding: 20px;
       margin-top: 40px;
+      box-shadow: 0 6px 15px #ff005533;
+      color: #ff77aa;
     }
-    input, select {
-      padding: 8px;
-      border-radius: 5px;
-      border: none;
-      margin-bottom: 10px;
+    #cart h3 {
+      margin-top: 0;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #ff0055;
+      text-shadow: 0 0 8px #e6007eaa;
     }
     .whatsapp-button {
       display: inline-block;
-      margin-top: 15px;
+      margin-top: 20px;
       background-color: #25D366;
       color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
+      padding: 14px 28px;
+      border-radius: 12px;
       text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s;
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2rem;
+      box-shadow: 0 6px 15px #25d366cc;
+      transition: background-color 0.3s ease;
     }
     .whatsapp-button:hover {
       background-color: #1ebe5b;
+      box-shadow: 0 8px 22px #1ebe5bcc;
     }
     .aviso-diseno {
-      color: #ffaaaa;
-      font-weight: bold;
-      background: #331111;
-      padding: 10px;
-      border-radius: 5px;
-      margin-top: 10px;
+      color: #ff77aa;
+      font-weight: 700;
+      background: #330022;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+      text-align: center;
+      font-size: 1.1rem;
+      box-shadow: 0 0 10px #ff0055bb;
     }
   </style>
-  <script>
-    function addToCart(productName) {
-      const url = `https://wa.me/573508326885?text=Hola!%20Estoy%20interesado%20en%20el%20producto:%20${encodeURIComponent(productName)}`;
-      window.open(url, '_blank');
-    }
-
-    function addCustomToCart(event) {
-      event.preventDefault();
-      const tipo = document.getElementById('tipo').value;
-      const color = document.getElementById('color').value;
-      const talla = document.getElementById('talla').value;
-      const diseño = document.getElementById('diseño').value.split('\\').pop();
-      const mensaje = `Hola!%20Quiero%20personalizar%20una%20prenda:%0A-%20Tipo:%20${tipo}%0A-%20Color:%20${color}%0A-%20Talla:%20${talla}%0A-%20Archivo%20de%20diseño:%20${diseño}%0A%0ARecuerda%20que%20debes%20enviarme%20la%20imagen%20por%20aquí%20directamente.`;
-      const url = `https://wa.me/573508326885?text=${mensaje}`;
-      window.open(url, '_blank');
-    }
-  </script>
 </head>
 <body>
   <header>
     <h1>Ink Streetwear</h1>
     <p>Dale voz a tu estilo. Viste lo que piensas.</p>
   </header>
+
   <nav>
     <a href="#inicio">Inicio</a>
     <a href="#personaliza">Personaliza</a>
@@ -165,26 +235,33 @@
   <section id="personaliza">
     <h2>Personaliza tu prenda</h2>
     <form id="custom-form" onsubmit="addCustomToCart(event)">
-      <label for="tipo">Tipo de prenda:</label><br />
-      <select id="tipo">
+      <label for="tipo">Tipo de prenda:</label>
+      <select id="tipo" required>
+        <option value="" disabled selected>Selecciona un tipo</option>
         <option>Camiseta</option>
         <option>Hoodie</option>
         <option>Gorra</option>
-      </select><br />
-      <label for="color">Color:</label><br />
-      <input type="color" id="color" /><br />
-      <label for="talla">Talla:</label><br />
-      <select id="talla">
+      </select>
+
+      <label for="color">Color:</label>
+      <input type="color" id="color" required />
+
+      <label for="talla">Talla:</label>
+      <select id="talla" required>
+        <option value="" disabled selected>Selecciona una talla</option>
         <option>S</option>
         <option>M</option>
         <option>L</option>
         <option>XL</option>
-      </select><br />
-      <label for="diseño">Sube tu diseño:</label><br />
-      <input type="file" id="diseño" /><br />
+      </select>
+
+      <label for="diseño">Sube tu diseño (imagen):</label>
+      <input type="file" id="diseño" accept="image/*" required />
+
       <div class="aviso-diseno">
-        Recuerda: una vez envíes el pedido, debes subir tu diseño como imagen aquí en el chat de WhatsApp.
+        Recuerda: Una vez envíes el pedido, también debes subir tu diseño en el chat de WhatsApp.
       </div>
+
       <button type="submit">Añadir personalizado al carrito</button>
     </form>
   </section>
@@ -205,10 +282,145 @@
     </div>
   </section>
 
+  <section id="nosotros">
+    <h2>Nosotros</h2>
+    <p>En Ink Streetwear somos apasionados por la cultura urbana y la moda personalizada. Creemos que cada prenda debe contar una historia y reflejar tu personalidad única. Nuestro equipo se dedica a crear diseños originales inspirados en la cultura callejera colombiana, siempre con la mejor calidad y compromiso.</p>
+  </section>
+
   <section id="contacto">
     <h2>Contáctanos</h2>
     <p>¿Tienes dudas o quieres atención personalizada?</p>
-    <a href="https://wa.me/573508326885" class="whatsapp-button" target="_blank">Escríbenos</a>
+    <a href="https://wa.me/573508326885" class="whatsapp-button" target="_blank" rel="noopener noreferrer">Escríbenos</a>
   </section>
+
+  <section id="cart" style="display:none;">
+    <h3>Tu carrito de compras</h3>
+    <ul id="cart-items"></ul>
+    <form id="order-form" onsubmit="sendOrder(event)">
+      <h3>Datos para el pedido</h3>
+      <label for="nombre">Nombre completo:</label>
+      <input type="text" id="nombre" required />
+      <label for="correo">Correo electrónico:</label>
+      <input type="email" id="correo" required />
+      <label for="whatsapp">Número de WhatsApp:</label>
+      <input type="tel" id="whatsapp" placeholder="+57 3000000000" required />
+      <label for="direccion">Dirección:</label>
+      <input type="text" id="direccion" required />
+      <label for="ciudad">Ciudad:</label>
+      <input type="text" id="ciudad" required />
+      <button type="submit">Enviar pedido por WhatsApp</button>
+    </form>
+  </section>
+
+  <script>
+    let cart = [];
+
+    function addToCart(productName) {
+      cart.push({ tipo: productName, color: 'N/A', talla: 'N/A', diseño: null });
+      alert(productName + ' añadido al carrito');
+      showCart();
+    }
+
+    function addCustomToCart(event) {
+      event.preventDefault();
+
+      const tipo = document.getElementById('tipo').value;
+      const color = document.getElementById('color').value;
+      const talla = document.getElementById('talla').value;
+      const diseñoInput = document.getElementById('diseño');
+      const diseñoFile = diseñoInput.files[0];
+
+      if (!tipo || !color || !talla || !diseñoFile) {
+        alert('Por favor, completa todos los campos y sube tu diseño.');
+        return;
+      }
+
+      // Leer la imagen subida para mostrarla y enviarla
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        cart.push({
+          tipo,
+          color,
+          talla,
+          diseño: e.target.result,
+          diseñoNombre: diseñoFile.name
+        });
+        alert('Prenda personalizada añadida al carrito');
+        showCart();
+
+        // Reset formulario
+        document.getElementById('custom-form').reset();
+      };
+      reader.readAsDataURL(diseñoFile);
+    }
+
+    function showCart() {
+      if (cart.length === 0) {
+        document.getElementById('cart').style.display = 'none';
+        return;
+      }
+
+      const cartSection = document.getElementById('cart');
+      const cartItemsList = document.getElementById('cart-items');
+      cartItemsList.innerHTML = '';
+
+      cart.forEach((item, index) => {
+        let listItem = document.createElement('li');
+        listItem.style.marginBottom = '15px';
+
+        let itemText = `<strong>${item.tipo}</strong> - Color: <span style="color:${item.color}">${item.color}</span>, Talla: ${item.talla}`;
+        if(item.diseño) {
+          itemText += `<br><img src="${item.diseño}" alt="Diseño personalizado" style="max-width:100px; margin-top:5px; border-radius:8px; box-shadow:0 0 8px #ff0055cc;" />`;
+          itemText += `<br><em>${item.diseñoNombre}</em>`;
+        }
+        listItem.innerHTML = itemText;
+        cartItemsList.appendChild(listItem);
+      });
+
+      cartSection.style.display = 'block';
+      window.location.href = '#cart';
+    }
+
+    function sendOrder(event) {
+      event.preventDefault();
+
+      if (cart.length === 0) {
+        alert('Tu carrito está vacío.');
+        return;
+      }
+
+      const nombre = document.getElementById('nombre').value.trim();
+      const correo = document.getElementById('correo').value.trim();
+      const whatsapp = document.getElementById('whatsapp').value.trim();
+      const direccion = document.getElementById('direccion').value.trim();
+      const ciudad = document.getElementById('ciudad').value.trim();
+
+      if (!nombre || !correo || !whatsapp || !direccion || !ciudad) {
+        alert('Por favor, completa todos los datos para el pedido.');
+        return;
+      }
+
+      let mensaje = `*Nuevo pedido Ink Streetwear*\n\n*Cliente:* ${nombre}\n*Correo:* ${correo}\n*WhatsApp:* ${whatsapp}\n*Dirección:* ${direccion}\n*Ciudad:* ${ciudad}\n\n*Detalle del pedido:*\n`;
+
+      cart.forEach((item, idx) => {
+        mensaje += `\n${idx + 1}. ${item.tipo} - Color: ${item.color}, Talla: ${item.talla}`;
+        if (item.diseñoNombre) {
+          mensaje += `\n   Diseño: ${item.diseñoNombre}`;
+        }
+      });
+
+      // WhatsApp URL encode
+      const encodedMsg = encodeURIComponent(mensaje);
+
+      // Abrir WhatsApp con el mensaje
+      window.open(`https://wa.me/573508326885?text=${encodedMsg}`, '_blank');
+
+      // Limpiar carrito y formulario
+      cart = [];
+      showCart();
+      document.getElementById('order-form').reset();
+      alert('Gracias por tu pedido. Te contactaremos pronto por WhatsApp.');
+    }
+  </script>
 </body>
 </html>
