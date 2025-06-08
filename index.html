@@ -111,6 +111,25 @@
       font-size: 1.3rem;
       text-shadow: 0 0 4px #e6007eaa;
     }
+    .product select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+      margin-bottom: 12px;
+      background-color: #222;
+      color: #eee;
+      box-shadow: inset 0 0 8px #ff005599;
+      font-size: 1rem;
+      font-family: 'Roboto', sans-serif;
+    }
+    .price {
+      font-weight: 700;
+      color: #ff77aa;
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+      text-shadow: 0 0 6px #ff0055cc;
+    }
     .product button {
       background-color: #ff0055;
       border: none;
@@ -180,6 +199,23 @@
       font-weight: 700;
       font-size: 1.8rem;
       color: #ff0055;
+      text-shadow: 0 0 8px #e6007eaa;
+    }
+    #cart-items {
+      list-style: none;
+      padding-left: 0;
+    }
+    #cart-items li {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ff005544;
+      padding-bottom: 10px;
+    }
+    #cart-total {
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #ff0055;
+      text-align: right;
+      margin-top: 20px;
       text-shadow: 0 0 8px #e6007eaa;
     }
     .whatsapp-button {
@@ -269,22 +305,44 @@
   <section id="tienda">
     <h2>Nuestra Tienda</h2>
     <div class="product-grid">
-      <div class="product">
+      <div class="product" data-name="Camiseta Ink">
         <img src="img/camiseta1.png" alt="Camiseta urbana" />
         <h3>Camiseta Ink</h3>
-        <button onclick="addToCart('Camiseta Ink')">Añadir al carrito</button>
+        <select class="size-select" onchange="updatePrice(this)">
+          <option value="" disabled selected>Selecciona talla</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+        </select>
+        <div class="price" data-base-price="40000">Precio: $40,000</div>
+        <button onclick="addStoreToCart(this)">Añadir al carrito</button>
       </div>
-      <div class="product">
+      <div class="product" data-name="Hoodie Ink">
         <img src="img/hoodie1.png" alt="Hoodie urbano" />
         <h3>Hoodie Ink</h3>
-        <button onclick="addToCart('Hoodie Ink')">Añadir al carrito</button>
+        <select class="size-select" onchange="updatePrice(this)">
+          <option value="" disabled selected>Selecciona talla</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+        </select>
+        <div class="price" data-base-price="70000">Precio: $70,000</div>
+        <button onclick="addStoreToCart(this)">Añadir al carrito</button>
       </div>
+    </div>
+
+    <div id="cart">
+      <h3>Tu carrito</h3>
+      <ul id="cart-items"></ul>
+      <div id="cart-total">Total: $0</div>
     </div>
   </section>
 
   <section id="nosotros">
     <h2>Nosotros</h2>
-    <p>En Ink Streetwear somos apasionados por la cultura urbana y la moda personalizada. Creemos que cada prenda debe contar una historia y reflejar tu personalidad única. Nuestro equipo se dedica a crear diseños originales inspirados en la cultura callejera colombiana, siempre con la mejor calidad y compromiso.</p>
+    <p>Somos Ink Streetwear, una marca que representa la cultura urbana colombiana a través de prendas únicas y personalizadas. Nuestro compromiso es que cada diseño refleje tu voz y estilo propio.</p>
   </section>
 
   <section id="contacto">
@@ -293,34 +351,78 @@
     <a href="https://wa.me/573508326885" class="whatsapp-button" target="_blank" rel="noopener noreferrer">Escríbenos</a>
   </section>
 
-  <section id="cart" style="display:none;">
-    <h3>Tu carrito de compras</h3>
-    <ul id="cart-items"></ul>
-    <form id="order-form" onsubmit="sendOrder(event)">
-      <h3>Datos para el pedido</h3>
-      <label for="nombre">Nombre completo:</label>
-      <input type="text" id="nombre" required />
-      <label for="correo">Correo electrónico:</label>
-      <input type="email" id="correo" required />
-      <label for="whatsapp">Número de WhatsApp:</label>
-      <input type="tel" id="whatsapp" placeholder="+57 3000000000" required />
-      <label for="direccion">Dirección:</label>
-      <input type="text" id="direccion" required />
-      <label for="ciudad">Ciudad:</label>
-      <input type="text" id="ciudad" required />
-      <button type="submit">Enviar pedido por WhatsApp</button>
-    </form>
-  </section>
-
   <script>
-    let cart = [];
+    // Precios base para tallas
+    // Por ejemplo, podemos aplicar un pequeño ajuste de precio por talla si quieres:
+    // Para simplificar aquí precio fijo, pero puedes cambiar según talla si quieres.
+    const basePrices = {
+      "Camiseta Ink": 40000,
+      "Hoodie Ink": 70000
+    };
 
-    function addToCart(productName) {
-      cart.push({ tipo: productName, color: 'N/A', talla: 'N/A', diseño: null });
-      alert(productName + ' añadido al carrito');
-      showCart();
+    const tallaIncrement = {
+      "S": 0,
+      "M": 2000,
+      "L": 4000,
+      "XL": 6000
+    };
+
+    // Actualiza el precio mostrado según la talla elegida
+    function updatePrice(select) {
+      const productDiv = select.closest('.product');
+      const priceDiv = productDiv.querySelector('.price');
+      const productName = productDiv.dataset.name;
+      const talla = select.value;
+      if (talla && basePrices[productName] !== undefined) {
+        const precio = basePrices[productName] + (tallaIncrement[talla] || 0);
+        priceDiv.textContent = `Precio: $${precio.toLocaleString('es-CO')}`;
+      } else {
+        priceDiv.textContent = `Precio: $${basePrices[productName].toLocaleString('es-CO')}`;
+      }
     }
 
+    // Carrito
+    const cartItems = [];
+    const cartItemsList = document.getElementById('cart-items');
+    const cartTotalDiv = document.getElementById('cart-total');
+
+    function addStoreToCart(button) {
+      const productDiv = button.closest('.product');
+      const productName = productDiv.dataset.name;
+      const tallaSelect = productDiv.querySelector('.size-select');
+      const talla = tallaSelect.value;
+      if (!talla) {
+        alert('Por favor selecciona una talla.');
+        return;
+      }
+      const precioBase = basePrices[productName];
+      const precio = precioBase + (tallaIncrement[talla] || 0);
+
+      // Añadir producto al carrito
+      cartItems.push({
+        nombre: productName,
+        talla: talla,
+        precio: precio
+      });
+
+      renderCart();
+    }
+
+    function renderCart() {
+      cartItemsList.innerHTML = '';
+      let total = 0;
+
+      cartItems.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${item.nombre} - Talla: ${item.talla} - Precio: $${item.precio.toLocaleString('es-CO')}`;
+        cartItemsList.appendChild(li);
+        total += item.precio;
+      });
+
+      cartTotalDiv.textContent = `Total: $${total.toLocaleString('es-CO')}`;
+    }
+
+    // Formulario de personalización (mantiene tu código)
     function addCustomToCart(event) {
       event.preventDefault();
 
@@ -328,98 +430,26 @@
       const color = document.getElementById('color').value;
       const talla = document.getElementById('talla').value;
       const diseñoInput = document.getElementById('diseño');
-      const diseñoFile = diseñoInput.files[0];
 
-      if (!tipo || !color || !talla || !diseñoFile) {
-        alert('Por favor, completa todos los campos y sube tu diseño.');
+      if (!tipo || !color || !talla || diseñoInput.files.length === 0) {
+        alert('Por favor completa todos los campos y sube tu diseño.');
         return;
       }
 
-      // Leer la imagen subida para mostrarla y enviarla
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        cart.push({
-          tipo,
-          color,
-          talla,
-          diseño: e.target.result,
-          diseñoNombre: diseñoFile.name
-        });
-        alert('Prenda personalizada añadida al carrito');
-        showCart();
-
-        // Reset formulario
-        document.getElementById('custom-form').reset();
-      };
-      reader.readAsDataURL(diseñoFile);
-    }
-
-    function showCart() {
-      if (cart.length === 0) {
-        document.getElementById('cart').style.display = 'none';
-        return;
-      }
-
-      const cartSection = document.getElementById('cart');
-      const cartItemsList = document.getElementById('cart-items');
-      cartItemsList.innerHTML = '';
-
-      cart.forEach((item, index) => {
-        let listItem = document.createElement('li');
-        listItem.style.marginBottom = '15px';
-
-        let itemText = `<strong>${item.tipo}</strong> - Color: <span style="color:${item.color}">${item.color}</span>, Talla: ${item.talla}`;
-        if(item.diseño) {
-          itemText += `<br><img src="${item.diseño}" alt="Diseño personalizado" style="max-width:100px; margin-top:5px; border-radius:8px; box-shadow:0 0 8px #ff0055cc;" />`;
-          itemText += `<br><em>${item.diseñoNombre}</em>`;
-        }
-        listItem.innerHTML = itemText;
-        cartItemsList.appendChild(listItem);
+      // Precio base ejemplo para personalizado
+      const basePrecio = 50000;
+      cartItems.push({
+        nombre: `Personalizado: ${tipo}`,
+        talla: talla,
+        color: color,
+        precio: basePrecio
       });
 
-      cartSection.style.display = 'block';
-      window.location.href = '#cart';
-    }
+      renderCart();
 
-    function sendOrder(event) {
-      event.preventDefault();
-
-      if (cart.length === 0) {
-        alert('Tu carrito está vacío.');
-        return;
-      }
-
-      const nombre = document.getElementById('nombre').value.trim();
-      const correo = document.getElementById('correo').value.trim();
-      const whatsapp = document.getElementById('whatsapp').value.trim();
-      const direccion = document.getElementById('direccion').value.trim();
-      const ciudad = document.getElementById('ciudad').value.trim();
-
-      if (!nombre || !correo || !whatsapp || !direccion || !ciudad) {
-        alert('Por favor, completa todos los datos para el pedido.');
-        return;
-      }
-
-      let mensaje = `*Nuevo pedido Ink Streetwear*\n\n*Cliente:* ${nombre}\n*Correo:* ${correo}\n*WhatsApp:* ${whatsapp}\n*Dirección:* ${direccion}\n*Ciudad:* ${ciudad}\n\n*Detalle del pedido:*\n`;
-
-      cart.forEach((item, idx) => {
-        mensaje += `\n${idx + 1}. ${item.tipo} - Color: ${item.color}, Talla: ${item.talla}`;
-        if (item.diseñoNombre) {
-          mensaje += `\n   Diseño: ${item.diseñoNombre}`;
-        }
-      });
-
-      // WhatsApp URL encode
-      const encodedMsg = encodeURIComponent(mensaje);
-
-      // Abrir WhatsApp con el mensaje
-      window.open(`https://wa.me/573508326885?text=${encodedMsg}`, '_blank');
-
-      // Limpiar carrito y formulario
-      cart = [];
-      showCart();
-      document.getElementById('order-form').reset();
-      alert('Gracias por tu pedido. Te contactaremos pronto por WhatsApp.');
+      // Opcional: limpiar formulario
+      event.target.reset();
+      alert('Producto personalizado añadido al carrito. Recuerda subir tu diseño en el chat de WhatsApp.');
     }
   </script>
 </body>
