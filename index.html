@@ -103,6 +103,20 @@
       border: none;
       margin-bottom: 10px;
     }
+    .whatsapp-button {
+      display: inline-block;
+      margin-top: 15px;
+      background-color: #25D366;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .whatsapp-button:hover {
+      background-color: #1ebe5b;
+    }
   </style>
 </head>
 <body>
@@ -125,7 +139,7 @@
 
   <section id="personaliza">
     <h2>Personaliza tu prenda</h2>
-    <form>
+    <form id="custom-form" onsubmit="addCustomToCart(event)">
       <label for="tipo">Tipo de prenda:</label><br />
       <select id="tipo">
         <option>Camiseta</option>
@@ -143,7 +157,7 @@
       </select><br />
       <label for="diseño">Sube tu diseño:</label><br />
       <input type="file" id="diseño" /><br />
-      <button type="submit">Enviar pedido</button>
+      <button type="submit">Añadir personalizado al carrito</button>
     </form>
   </section>
 
@@ -188,9 +202,9 @@
 
   <section id="contacto">
     <h2>Contacto</h2>
-    <p>📱 WhatsApp: 3508326885</p>
-    <p>📧 Email: mz97381@gmail.com</p>
-    <p>📍 Cali, Colombia</p>
+    <p>📱 WhatsApp: <a class="whatsapp-button" href="https://wa.me/573100000000" target="_blank">Escríbenos</a></p>
+    <p>📧 Email: contacto@inkstreetwear.com</p>
+    <p>📍 Bogotá, Colombia</p>
   </section>
 
   <footer>
@@ -208,6 +222,19 @@
       document.getElementById('cart-items').appendChild(item);
       total += price;
       document.getElementById('total').textContent = total.toLocaleString();
+    }
+
+    function addCustomToCart(event) {
+      event.preventDefault();
+      const tipo = document.getElementById('tipo').value;
+      const color = document.getElementById('color').value;
+      const talla = document.getElementById('talla').value;
+      const diseñoInput = document.getElementById('diseño');
+      const diseño = diseñoInput.files.length > 0 ? diseñoInput.files[0].name : 'Sin archivo';
+      const producto = `Prenda personalizada: ${tipo}, Talla: ${talla}, Color: ${color}, Diseño: ${diseño}`;
+      const precio = 60000;
+      addToCart(producto, precio);
+      document.getElementById('custom-form').reset();
     }
 
     function submitOrder(event) {
@@ -238,3 +265,4 @@
   </script>
 </body>
 </html>
+
