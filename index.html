@@ -2,257 +2,157 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Barrio Crudo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ink Streetwear</title>
+  <!-- AOS CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <style>
-    /* Reset básico */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
+      margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #0d0d0d;
-      color: #e0f7fa;
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      color: #f0f0f0;
     }
-
     header {
-      background: linear-gradient(90deg, #011627, #023e8a, #0077b6);
-      padding: 2rem 1rem;
+      background: linear-gradient(90deg, #0f0c29, #302b63, #24243e);
+      padding: 2rem;
       text-align: center;
-      color: #00f5ff;
-      text-shadow: 0 0 8px #00f5ff;
+      color: #0ff;
     }
-
     nav {
-      background-color: #001f3f;
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      padding: 1rem 0;
-      box-shadow: 0 0 15px #0077b6;
+      gap: 1rem;
+      background-color: #1a1a1a;
+      padding: 1rem;
     }
-
     nav a {
-      color: #00e5ff;
+      color: #0ff;
       text-decoration: none;
-      font-weight: 700;
-      font-size: 1.1rem;
+      font-weight: bold;
       transition: color 0.3s ease;
-      text-shadow: 0 0 6px #00e5ff;
     }
-
     nav a:hover {
-      color: #00fff7;
-      text-shadow: 0 0 12px #00fff7;
-    }
-
-    section {
-      padding: 2rem 1rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      flex-grow: 1;
-    }
-
-    h2 {
       color: #00bcd4;
-      border-bottom: 2px solid #00bcd4;
-      padding-bottom: 0.4rem;
-      margin-bottom: 1.5rem;
-      text-shadow: 0 0 6px #00bcd4;
     }
-
+    section {
+      padding: 2rem;
+    }
+    h2 {
+      color: #00ffff;
+      border-bottom: 2px solid #00ffff;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.5rem;
     }
-
     .product {
-      background-color: #012a4a;
-      border-radius: 12px;
+      background-color: #1e1e2f;
       padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #00ffff55;
       text-align: center;
-      box-shadow: 0 0 10px #00bcd4cc;
-      color: #caf0f8;
-      transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
-
     .product:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 20px #00bcd4ff;
+      box-shadow: 0 0 20px #00bcd4aa;
     }
-
     .product img {
-      width: 100%;
-      height: auto;
+      max-width: 100%;
       border-radius: 10px;
-      margin-bottom: 0.8rem;
-      box-shadow: 0 0 8px #00bcd4cc;
+      margin-bottom: 0.5rem;
     }
-
-    label {
+    label, select, input[type="file"], input[type="text"], input[type="email"], input[type="tel"], textarea {
       display: block;
-      margin: 0.5rem 0 0.2rem 0;
-      font-weight: 600;
-      color: #80deea;
-      text-shadow: 0 0 5px #80deea88;
-      text-align: left;
+      margin: 0.5rem auto;
+      color: #fff;
+      width: 90%;
+      max-width: 300px;
     }
-
-    select, input[type="file"], input[type="text"], input[type="email"], textarea {
-      width: 100%;
+    select, input[type="file"], input[type="text"], input[type="email"], input[type="tel"], textarea {
       padding: 0.5rem;
       border-radius: 8px;
+      background: #333;
+      color: #0ff;
       border: none;
-      background-color: #023e8a;
-      color: #caf0f8;
-      box-shadow: inset 0 0 5px #00bcd4cc;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    textarea {
       resize: vertical;
+      min-height: 80px;
     }
-
-    select:hover, input[type="file"]:hover, input[type="text"]:hover, input[type="email"]:hover, textarea:hover {
-      background-color: #0353a4;
-    }
-
     button {
-      margin-top: 1rem;
       background: #00bcd4;
+      color: #000;
+      padding: 0.7rem 1.5rem;
       border: none;
-      color: #012a4a;
-      font-weight: 700;
-      padding: 0.7rem 1.4rem;
-      border-radius: 12px;
+      border-radius: 10px;
       cursor: pointer;
-      box-shadow: 0 0 10px #00bcd4cc;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      font-size: 1rem;
-      text-shadow: 0 0 3px #012a4a;
+      margin-top: 1rem;
+      font-weight: bold;
+      transition: background 0.3s ease;
+      width: 100%;
+      max-width: 320px;
     }
-
     button:hover {
       background: #0097a7;
-      color: #e0f7fa;
-      box-shadow: 0 0 15px #0097a7cc;
+      color: #fff;
     }
-
     #cart-list li {
-      background-color: #01497c;
-      margin-bottom: 0.5rem;
+      background-color: #292941;
       padding: 0.5rem;
-      border-radius: 8px;
-      color: #d0f0fd;
-      box-shadow: 0 0 8px #00bcd4aa;
-      list-style: none;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    #cart-list li img {
-      max-width: 60px;
-      max-height: 60px;
+      margin: 0.3rem 0;
       border-radius: 6px;
-      box-shadow: 0 0 10px #00bcd4cc;
-      margin-left: 1rem;
+      list-style: none;
     }
-
-    #total {
-      font-weight: 700;
-      color: #00bcd4;
-      text-shadow: 0 0 6px #00bcd4cc;
-    }
-
-    #checkout-btn {
-      display: inline-block;
+    #cart-summary {
       margin-top: 1rem;
-      padding: 0.8rem 2rem;
-      background-color: #0077b6;
-      color: #caf0f8;
-      font-weight: 700;
-      border-radius: 15px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #00bcd4;
+    }
+    #checkout-btn {
+      display: block;
+      margin: 1rem auto 0;
+      padding: 0.8rem 1.8rem;
+      background: #00bcd4;
+      color: #000;
+      font-weight: bold;
       text-decoration: none;
-      box-shadow: 0 0 15px #00bcd4cc;
-      transition: background-color 0.3s ease;
+      border-radius: 10px;
+      max-width: 320px;
+      text-align: center;
+      cursor: pointer;
     }
     #checkout-btn:hover {
-      background-color: #004e89;
-      box-shadow: 0 0 20px #00bcd4ff;
+      background: #0097a7;
+      color: #fff;
     }
-
-    .whatsapp-button {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.8rem 2rem;
-      background: #25d366;
-      color: #000;
-      font-weight: 700;
-      border-radius: 12px;
-      text-decoration: none;
-      box-shadow: 0 0 15px #25d366aa;
-      transition: background-color 0.3s ease;
-    }
-    .whatsapp-button:hover {
-      background: #1ebe56;
-      box-shadow: 0 0 20px #25d366ff;
-    }
-
     footer {
-      background-color: #001f3f;
-      color: #80deea;
+      background-color: #111;
       text-align: center;
-      padding: 1rem 0;
+      padding: 1rem;
       font-size: 0.9rem;
-      text-shadow: 0 0 6px #00bcd4aa;
-      margin-top: auto;
+      color: #666;
     }
-
-        @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    /* Responsive para inputs */
-    @media (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      button, #checkout-btn, .whatsapp-button {
-        width: 100%;
-      }
+    /* Animations for buttons */
+    button:active {
+      transform: scale(0.95);
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Barrio Crudo</h1>
+
+  <header data-aos="fade-down">
+    <h1>Ink Streetwear</h1>
     <p>Diseña. Viste. Expresa. Estilo urbano personalizado a tu nivel.</p>
   </header>
 
-  <nav>
+  <nav data-aos="fade-down" data-aos-delay="200">
     <a href="#tienda">Tienda</a>
     <a href="#galeria">Galería</a>
     <a href="#carrito">Carrito</a>
@@ -260,327 +160,249 @@
     <a href="#filosofia">Nuestra Filosofía</a>
   </nav>
 
-   <!-- Nueva Sección: Misión, Visión y Principios -->
-  <section id="filosofia">
+  <!-- Sección de selección para pedido personalizado -->
+  <section id="pedido-personalizado" data-aos="fade-up">
+    <h2>Pedido Personalizado</h2>
+    <form id="custom-order-form">
+      <label for="tipo-prenda">Selecciona el tipo de prenda:</label>
+      <select id="tipo-prenda" required>
+        <option value="" disabled selected>Elige una opción</option>
+        <option value="camiseta" data-price="40000">Camiseta - $40,000</option>
+        <option value="hoodie" data-price="80000">Hoodie - $80,000</option>
+        <option value="gorra" data-price="30000">Gorra - $30,000</option>
+      </select>
+
+      <label for="talla">Selecciona la talla:</label>
+      <select id="talla" required>
+        <option value="" disabled selected>Primero elige la prenda</option>
+      </select>
+
+      <label for="color">Color:</label>
+      <select id="color" required>
+        <option value="" disabled selected>Elige un color</option>
+        <option value="Negro">Negro</option>
+        <option value="Blanco">Blanco</option>
+        <option value="Azul">Azul</option>
+        <option value="Rojo">Rojo</option>
+      </select>
+
+      <label for="diseno">Sube el diseño que deseas imprimir:</label>
+      <input type="file" id="diseno" accept="image/*" required />
+
+      <button type="button" id="add-custom-cart">Añadir al carrito</button>
+    </form>
+  </section>
+
+  <!-- Sección Tienda con productos ya listados -->
+  <section id="tienda" data-aos="fade-up">
+    <h2>Tienda</h2>
+    <div class="product-grid">
+      <div class="product" data-aos="zoom-in">
+        <img src="img/camiseta1.png" alt="Camiseta urbana Ink Streetwear" />
+        <h3>Camiseta Urbana</h3>
+        <p>Talla: <select class="product-talla" data-product="Camiseta">
+          <option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option>
+        </select></p>
+        <p>Precio: $40,000</p>
+        <button class="add-product-btn" data-name="Camiseta Urbana" data-price="40000">Añadir al carrito</button>
+      </div>
+      <div class="product" data-aos="zoom-in" data-aos-delay="100">
+        <img src="img/hoodie1.png" alt="Hoodie urbana Ink Streetwear" />
+        <h3>Hoodie Urbana</h3>
+        <p>Talla: <select class="product-talla" data-product="Hoodie">
+          <option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option>
+        </select></p>
+        <p>Precio: $80,000</p>
+        <button class="add-product-btn" data-name="Hoodie Urbana" data-price="80000">Añadir al carrito</button>
+      </div>
+      <div class="product" data-aos="zoom-in" data-aos-delay="200">
+        <img src="img/gorra1.png" alt="Gorra urbana Ink Streetwear" />
+        <h3>Gorra Urbana</h3>
+        <p>Talla: <select class="product-talla" data-product="Gorra">
+          <option value="Talla Única">Talla Única</option>
+        </select></p>
+        <p>Precio: $30,000</p>
+        <button class="add-product-btn" data-name="Gorra Urbana" data-price="30000">Añadir al carrito</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carrito -->
+  <section id="carrito" data-aos="fade-up">
+    <h2>Carrito</h2>
+    <ul id="cart-list"></ul>
+    <div id="cart-summary">Total: $0</div>
+
+    <form id="checkout-form" style="margin-top:1rem; max-width:320px;">
+      <h3>Datos para el pedido</h3>
+      <label for="cliente-nombre">Nombre completo:</label>
+      <input type="text" id="cliente-nombre" required />
+      <label for="cliente-correo">Correo electrónico:</label>
+      <input type="email" id="cliente-correo" required />
+      <label for="cliente-whatsapp">Número de WhatsApp:</label>
+      <input type="tel" id="cliente-whatsapp" required placeholder="+57 3XXXXXXXXX" pattern="\+?\d{10,13}" />
+      <label for="cliente-direccion">Dirección:</label>
+      <textarea id="cliente-direccion" placeholder="Dirección para entrega o comentarios"></textarea>
+      <button type="button" id="finalizar-pedido">Finalizar pedido via WhatsApp</button>
+    </form>
+  </section>
+
+  <!-- Filosofía -->
+  <section id="filosofia" data-aos="fade-up">
     <h2>Misión</h2>
-    <p>Llevamos la calle al pecho. Creamos camisetas, hoodies y gorras con estilo urbano y alma propia, pa’ que cada quien vista lo que siente, lo que vibra y lo que representa. Acá no vendemos ropa, vendemos identidad personalizada con flow.</p>
+    <p>Brindar prendas urbanas personalizadas que permitan a nuestros clientes expresar su identidad única con estilo, calidad y autenticidad.</p>
 
     <h2>Visión</h2>
-    <p>Ser la marca más brava del barrio en Colombia y Latinoamérica, donde la calle, el arte y la libertad se mezclan en cada prenda. Queremos que cuando alguien vea nuestra ropa diga: “Ese parcero tiene estilo de verdad”.</p>
+    <p>Ser la marca líder en moda urbana personalizada en Colombia, reconocida por su creatividad, compromiso con la individualidad del cliente y su impacto cultural positivo.</p>
 
     <h2>Principios</h2>
-      <li>Calle Real: Nuestra esencia viene del barrio, del asfalto, del arte que nace sin permiso.</li>
-      <li>Libertad pa’ expresarse: Aquí cada prenda es una voz. Vos ponés el estilo, nosotros lo hacemos realidad.</li>
-      <li>Diseño con alma: No hacemos ropa vacía. Cada pieza tiene historia, mensaje y actitud.</li>
-      <li>Calidad sin disfraz: Usamos materiales resistentes, cómodos y con ese flow que aguanta calle.</li>
-      <li>Respeto por la diversidad: En nuestra marca caben todas las tribus, estilos, colores y formas de pensar.</li>
-      <li>Apoyo local: Crecemos con los nuestros, impulsando talento urbano y movidas de barrio.</li>
-  </section>
-  
-  <!-- Sección Pedido Personalizado -->
-  <section id="tienda">
-    <h2>Personaliza tu producto</h2>
-    <div class="product-grid">
-      <div class="product">
-        <h3>Selecciona tipo de prenda</h3>
-        <select id="tipo-prenda" onchange="actualizarOpciones()">
-          <option value="camiseta">Camiseta</option>
-          <option value="hoodie">Hoodie</option>
-          <option value="gorra">Gorra</option>
-        </select>
-
-        <div id="opciones-prenda"></div>
-
-        <label for="diseño" style="margin-top:1rem; font-weight:700; color:#00bcd4; text-shadow: 0 0 5px #00bcd4cc;">Sube tu diseño</label>
-        <input type="file" id="diseño" accept="image/*" />
-        <small style="color:#00bcd4; display:block; margin-top:0.2rem; text-shadow: 0 0 3px #00bcd4cc;">
-          * El diseño debe ser visible para el pedido
-        </small>
-        <button onclick="añadirProductoPersonalizado()">Añadir al carrito</button>
-      </div>
-    </div>
+    <ul>
+      <li>Originalidad en cada diseño y prenda.</li>
+      <li>Compromiso con la calidad y satisfacción del cliente.</li>
+      <li>Respeto por la diversidad y libertad de expresión.</li>
+      <li>Innovación constante en moda y procesos creativos.</li>
+      <li>Sostenibilidad y responsabilidad con la comunidad.</li>
+    </ul>
   </section>
 
-  <!-- Sección Productos Populares con selección y botón -->
-  <section id="galeria">
-    <h2>Diseños Populares</h2>
-    <div class="product-grid">
-
-      <!-- Camiseta 1 -->
-      <div class="product" data-nombre="Camiseta diseño 1" data-precio="45000">
-        <img src="img/camiseta2.png" alt="Camiseta diseño 1" />
-        <h3>Camiseta diseño 1</h3>
-
-        <label>Color:
-          <select class="color">
-            <option>Negro</option>
-            <option>Blanco</option>
-            <option>Rojo</option>
-            <option>Azul</option>
-          </select>
-        </label>
-        <label>Talla:
-          <select class="talla">
-            <option>S</option>
-            <option>M</option>
-            <option>L</option>
-            <option>XL</option>
-          </select>
-        </label>
-        <button onclick="añadirProductoPopular(this)">Añadir al carrito</button>
-      </div>
-
-      <!-- Hoodie -->
-      <div class="product" data-nombre="Hoodie urbano" data-precio="85000">
-        <img src="img/hoodie1.png" alt="Hoodie urbano" />
-        <h3>Hoodie urbano</h3>
-
-        <label>Color:
-          <select class="color">
-            <option>Negro</option>
-            <option>Blanco</option>
-            <option>Rojo</option>
-            <option>Azul</option>
-          </select>
-        </label>
-        <label>Talla:
-          <select class="talla">
-            <option>S</option>
-            <option>M</option>
-            <option>L</option>
-            <option>XL</option>
-          </select>
-        </label>
-        <button onclick="añadirProductoPopular(this)">Añadir al carrito</button>
-      </div>
-
-      <!-- Gorra -->
-      <div class="product" data-nombre="Gorra clásica" data-precio="35000">
-        <img src="img/gorra1.png" alt="Gorra clásica" />
-        <h3>Gorra clásica</h3>
-
-        <label>Color:
-          <select class="color">
-            <option>Negro</option>
-            <option>Gris</option>
-            <option>Verde</option>
-          </select>
-        </label>
-        <label>Talla:
-          <select class="talla">
-            <option>Estándar</option>
-            <option>Ajustable</option>
-          </select>
-        </label>
-        <button onclick="añadirProductoPopular(this)">Añadir al carrito</button>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Sección Carrito -->
-  <section id="carrito">
-    <h2>Tu carrito</h2>
-    <ul id="cart-list"></ul>
-    <p>Total: $<span id="total">0</span></p>
-
-    <!-- Formulario para datos cliente -->
-    <form id="datos-cliente" onsubmit="return false;" style="max-width: 450px; margin-top: 1rem;">
-      <h3>Datos del cliente</h3>
-
-      <label for="nombre">Nombre completo:</label>
-      <input type="text" id="nombre" placeholder="Tu nombre completo" required />
-
-      <label for="ciudad">Ciudad:</label>
-      <input type="text" id="ciudad" placeholder="Tu ciudad" required />
-
-      <label for="direccion">Dirección:</label>
-      <textarea id="direccion" placeholder="Tu dirección" rows="2" required></textarea>
-
-      <label for="correo">Correo electrónico:</label>
-      <input type="email" id="correo" placeholder="Tu correo" required />
-
-      <label for="whatsapp">WhatsApp (número con código país):</label>
-      <input type="text" id="whatsapp" placeholder="+57 3XXXXXXXXX" required />
-
-    </form>
-
-    <a id="checkout-btn" class="whatsapp-button" href="#" target="_blank" onclick="generarMensajeWhatsApp(event)">Enviar pedido por WhatsApp</a>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Barrio Crudo. Todos los derechos reservados.</p>
+  <footer data-aos="fade-up">
+    <p>© 2025 Ink Streetwear. Todos los derechos reservados.</p>
   </footer>
 
+  <!-- AOS JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
-    let cart = [];
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
 
-    function actualizarOpciones() {
-      const tipo = document.getElementById("tipo-prenda").value;
-      const opciones = document.getElementById("opciones-prenda");
-      let html = "";
+    // Manejo del cambio de tallas para pedido personalizado
+    const tipoPrendaSelect = document.getElementById('tipo-prenda');
+    const tallaSelect = document.getElementById('talla');
 
-      if (tipo === "camiseta" || tipo === "hoodie") {
-        html += `<label>Color:
-          <select id="color">
-            <option>Negro</option>
-            <option>Blanco</option>
-            <option>Rojo</option>
-            <option>Azul</option>
-          </select>
-        </label>`;
-        html += `<label>Talla:
-          <select id="talla">
-            <option>S</option>
-            <option>M</option>
-            <option>L</option>
-            <option>XL</option>
-          </select>
-        </label>`;
-      } else if (tipo === "gorra") {
-        html += `<label>Color:
-          <select id="color">
-            <option>Negro</option>
-            <option>Gris</option>
-            <option>Verde</option>
-          </select>
-        </label>`;
-        html += `<label>Talla:
-          <select id="talla">
-            <option>Estándar</option>
-            <option>Ajustable</option>
-          </select>
-        </label>`;
-      }
-      opciones.innerHTML = html;
-    }
-
-    function añadirProductoPersonalizado() {
-      const tipo = document.getElementById("tipo-prenda").value;
-      const color = document.getElementById("color")?.value || "-";
-      const talla = document.getElementById("talla")?.value || "-";
-
-      const diseñoInput = document.getElementById("diseño");
-      let diseño = "No se subió diseño";
-      let diseñoPreviewHTML = '';
-
-      if (diseñoInput.files.length > 0) {
-        const file = diseñoInput.files[0];
-        diseño = file.name;
-
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          diseñoPreviewHTML = `<img src="${e.target.result}" alt="Diseño subido" style="max-width:80px; max-height:80px; border-radius:8px; box-shadow: 0 0 10px #00bcd4cc; margin-left: 10px;" />`;
-          cart.push({ 
-            item: `${tipo.toUpperCase()} - Color: ${color}, Talla: ${talla}, Diseño: ${diseño}`, 
-            price: getPrecio(tipo),
-            diseñoImgHTML: diseñoPreviewHTML
-          });
-          renderCart();
-        };
-        reader.readAsDataURL(file);
-      } else {
-        cart.push({ 
-          item: `${tipo.toUpperCase()} - Color: ${color}, Talla: ${talla}, Diseño: ${diseño}`, 
-          price: getPrecio(tipo),
-          diseñoImgHTML: ''
-        });
-        renderCart();
-      }
-
-      diseñoInput.value = '';
-      actualizarOpciones();
-    }
-
-    function añadirProductoPopular(button) {
-      const productDiv = button.closest('.product');
-      const nombre = productDiv.dataset.nombre;
-      const precio = parseInt(productDiv.dataset.precio);
-      const color = productDiv.querySelector('.color').value;
-      const talla = productDiv.querySelector('.talla').value;
-
-      cart.push({
-        item: `${nombre} - Color: ${color}, Talla: ${talla}`,
-        price: precio,
-        diseñoImgHTML: ''
-      });
-      renderCart();
-    }
-
-    function getPrecio(tipo) {
-      if (tipo === "camiseta") return 45000;
-      if (tipo === "hoodie") return 85000;
-      if (tipo === "gorra") return 35000;
-      return 0;
-    }
-
-    function renderCart() {
-      const list = document.getElementById("cart-list");
-      const totalSpan = document.getElementById("total");
-      list.innerHTML = "";
-
-      let total = 0;
-      cart.forEach((p) => {
-        const li = document.createElement("li");
-
-        li.innerHTML = `
-          <span>${p.item} - $${p.price.toLocaleString()}</span>
-          ${p.diseñoImgHTML}
-        `;
-
-        list.appendChild(li);
-        total += p.price;
-      });
-
-      totalSpan.textContent = total.toLocaleString();
-    }
-
-    function generarMensajeWhatsApp(event) {
-      event.preventDefault();
-
-      if(cart.length === 0) {
-        alert("El carrito está vacío, por favor añade productos antes de proceder.");
-        return;
-      }
-
-      // Obtener datos cliente
-      const nombre = document.getElementById("nombre").value.trim();
-      const ciudad = document.getElementById("ciudad").value.trim();
-      const direccion = document.getElementById("direccion").value.trim();
-      const correo = document.getElementById("correo").value.trim();
-      const whatsapp = document.getElementById("whatsapp").value.trim();
-
-      // Validar datos
-      if (!nombre || !ciudad || !direccion || !correo || !whatsapp) {
-        alert("Por favor completa todos los datos del cliente.");
-        return;
-      }
-
-      // Generar mensaje
-      const total = cart.reduce((acc, p) => acc + p.price, 0);
-
-      let mensaje = `Hola, quiero hacer un pedido en Barrio Crudo:%0A`;
-      mensaje += `\nPedidos:%0A`;
-      cart.forEach((p) => {
-        mensaje += `• ${p.item} - $${p.price.toLocaleString()}%0A`;
-      });
-      mensaje += `%0ATotal: $${total.toLocaleString()}%0A`;
-      mensaje += `%0ANombre: ${encodeURIComponent(nombre)}%0A`;
-      mensaje += `Ciudad: ${encodeURIComponent(ciudad)}%0A`;
-      mensaje += `Dirección: ${encodeURIComponent(direccion)}%0A`;
-      mensaje += `Correo: ${encodeURIComponent(correo)}%0A`;
-      mensaje += `WhatsApp: ${encodeURIComponent(whatsapp)}%0A`;
-
-      const urlWhatsapp = `https://wa.me/573508326885?text=${mensaje}`;
-
-      // Abrir WhatsApp con mensaje
-      window.open(urlWhatsapp, "_blank");
-    }
-
-    window.onload = () => {
-      actualizarOpciones();
-      renderCart();
+    const tallasPorPrenda = {
+      camiseta: ['S', 'M', 'L', 'XL'],
+      hoodie: ['S', 'M', 'L', 'XL'],
+      gorra: ['Talla Única'],
     };
+
+    tipoPrendaSelect.addEventListener('change', () => {
+      const tipo = tipoPrendaSelect.value;
+      tallaSelect.innerHTML = '<option value="" disabled selected>Elige una talla</option>';
+      if (tallasPorPrenda[tipo]) {
+        tallasPorPrenda[tipo].forEach(t => {
+          const option = document.createElement('option');
+          option.value = t;
+          option.textContent = t;
+          tallaSelect.appendChild(option);
+        });
+      }
+    });
+
+    // Carrito
+    let carrito = [];
+
+    function actualizarCarrito() {
+      const cartList = document.getElementById('cart-list');
+      const cartSummary = document.getElementById('cart-summary');
+      cartList.innerHTML = '';
+      let total = 0;
+      carrito.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${item.nombre} - Talla: ${item.talla} - Color: ${item.color || 'N/A'} - Cantidad: ${item.cantidad} - $${item.precio * item.cantidad}`;
+        cartList.appendChild(li);
+        total += item.precio * item.cantidad;
+      });
+      cartSummary.textContent = `Total: $${total.toLocaleString()}`;
+    }
+
+    // Añadir productos predefinidos
+    document.querySelectorAll('.add-product-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const nombre = button.getAttribute('data-name');
+        const precio = parseInt(button.getAttribute('data-price'));
+        const productoDiv = button.closest('.product');
+        const talla = productoDiv.querySelector('.product-talla').value || 'S';
+        // Buscar si ya existe en carrito
+        const existente = carrito.find(item => item.nombre === nombre && item.talla === talla);
+        if (existente) {
+          existente.cantidad += 1;
+        } else {
+          carrito.push({ nombre, talla, color: null, cantidad: 1, precio });
+        }
+        actualizarCarrito();
+        button.textContent = 'Añadido ✔';
+        setTimeout(() => button.textContent = 'Añadir al carrito', 1500);
+      });
+    });
+
+    // Añadir pedido personalizado
+    document.getElementById('add-custom-cart').addEventListener('click', () => {
+      const tipo = tipoPrendaSelect.value;
+      const talla = tallaSelect.value;
+      const color = document.getElementById('color').value;
+      const disenoInput = document.getElementById('diseno');
+
+      if (!tipo || !talla || !color || disenoInput.files.length === 0) {
+        alert('Por favor completa todos los campos y sube un diseño.');
+        return;
+      }
+
+      // Obtener precio desde opción seleccionada
+      const precio = parseInt(tipoPrendaSelect.selectedOptions[0].dataset.price);
+
+      // Para simplificar no guardamos imagen en carrito, solo indicamos que hay un diseño personalizado
+      const nombre = `Personalizado (${tipo.charAt(0).toUpperCase() + tipo.slice(1)})`;
+
+      carrito.push({
+        nombre,
+        talla,
+        color,
+        cantidad: 1,
+        precio,
+        personalizado: true,
+      });
+
+      actualizarCarrito();
+
+      alert('Producto personalizado añadido al carrito.');
+      // Reset form
+      document.getElementById('custom-order-form').reset();
+      tallaSelect.innerHTML = '<option value="" disabled selected>Primero elige la prenda</option>';
+    });
+
+    // Finalizar pedido via WhatsApp
+    document.getElementById('finalizar-pedido').addEventListener('click', () => {
+      if (carrito.length === 0) {
+        alert('El carrito está vacío.');
+        return;
+      }
+      const nombre = document.getElementById('cliente-nombre').value.trim();
+      const correo = document.getElementById('cliente-correo').value.trim();
+      const whatsapp = document.getElementById('cliente-whatsapp').value.trim();
+      const direccion = document.getElementById('cliente-direccion').value.trim();
+
+      if (!nombre || !correo || !whatsapp) {
+        alert('Por favor completa todos los datos requeridos.');
+        return;
+      }
+
+      let mensaje = `*Nuevo pedido Ink Streetwear*\n\n*Cliente:* ${nombre}\n*Correo:* ${correo}\n*WhatsApp:* ${whatsapp}\n*Dirección:* ${direccion || 'No proporcionada'}\n\n*Detalles del pedido:*\n`;
+
+      carrito.forEach((item, index) => {
+        mensaje += `${index + 1}. ${item.nombre} - Talla: ${item.talla} - Color: ${item.color || 'N/A'} - Cantidad: ${item.cantidad} - $${item.precio * item.cantidad}\n`;
+      });
+
+      const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+      mensaje += `\n*Total:* $${total.toLocaleString()}`;
+
+      const encodedMessage = encodeURIComponent(mensaje);
+      const whatsappNumber = '573508326885'; // tu número sin signos ni espacios
+      const url = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+      window.open(url, '_blank');
+    });
   </script>
 </body>
 </html>
