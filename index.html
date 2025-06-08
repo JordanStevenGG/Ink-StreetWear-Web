@@ -126,6 +126,23 @@
       margin-top: 10px;
     }
   </style>
+  <script>
+    function addToCart(productName) {
+      const url = `https://wa.me/573508326885?text=Hola!%20Estoy%20interesado%20en%20el%20producto:%20${encodeURIComponent(productName)}`;
+      window.open(url, '_blank');
+    }
+
+    function addCustomToCart(event) {
+      event.preventDefault();
+      const tipo = document.getElementById('tipo').value;
+      const color = document.getElementById('color').value;
+      const talla = document.getElementById('talla').value;
+      const diseño = document.getElementById('diseño').value.split('\\').pop();
+      const mensaje = `Hola!%20Quiero%20personalizar%20una%20prenda:%0A-%20Tipo:%20${tipo}%0A-%20Color:%20${color}%0A-%20Talla:%20${talla}%0A-%20Archivo%20de%20diseño:%20${diseño}%0A%0ARecuerda%20que%20debes%20enviarme%20la%20imagen%20por%20aquí%20directamente.`;
+      const url = `https://wa.me/573508326885?text=${mensaje}`;
+      window.open(url, '_blank');
+    }
+  </script>
 </head>
 <body>
   <header>
@@ -172,4 +189,26 @@
     </form>
   </section>
 
-  <!-- ... el resto del código queda igual ... -->
+  <section id="tienda">
+    <h2>Nuestra Tienda</h2>
+    <div class="product-grid">
+      <div class="product">
+        <img src="img/camiseta1.png" alt="Camiseta urbana" />
+        <h3>Camiseta Ink</h3>
+        <button onclick="addToCart('Camiseta Ink')">Añadir al carrito</button>
+      </div>
+      <div class="product">
+        <img src="img/hoodie1.png" alt="Hoodie urbano" />
+        <h3>Hoodie Ink</h3>
+        <button onclick="addToCart('Hoodie Ink')">Añadir al carrito</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <h2>Contáctanos</h2>
+    <p>¿Tienes dudas o quieres atención personalizada?</p>
+    <a href="https://wa.me/573508326885" class="whatsapp-button" target="_blank">Escríbenos</a>
+  </section>
+</body>
+</html>
