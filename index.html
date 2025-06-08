@@ -75,7 +75,7 @@
       margin: 10px 0 5px;
       color: #00f0ff;
     }
-    .product select, .product input[type="number"] {
+    .product select, .product input[type="number"], .product input[type="file"] {
       width: 100%;
       margin-top: 5px;
     }
@@ -163,40 +163,22 @@
   </nav>
 
   <section id="tienda">
-    <h2>Nuestros productos</h2>
+    <h2>Personaliza tu producto</h2>
     <div class="product-grid">
       <div class="product">
-        <img src="img/camiseta1.png" alt="Camiseta personalizada">
-        <h3>Camiseta</h3>
-        <p>Precio: $45.000</p>
-        <label>Talla:
-          <select>
-            <option>S</option><option>M</option><option>L</option><option>XL</option>
-          </select>
-        </label>
-        <button onclick="addToCart('Camiseta', 45000)">Añadir al carrito</button>
-      </div>
-      <div class="product">
-        <img src="img/hoodie1.png" alt="Hoodie personalizado">
-        <h3>Hoodie</h3>
-        <p>Precio: $85.000</p>
-        <label>Talla:
-          <select>
-            <option>S</option><option>M</option><option>L</option><option>XL</option>
-          </select>
-        </label>
-        <button onclick="addToCart('Hoodie', 85000)">Añadir al carrito</button>
-      </div>
-      <div class="product">
-        <img src="img/gorra.png" alt="Gorra personalizada">
-        <h3>Gorra</h3>
-        <p>Precio: $35.000</p>
-        <label>Talla:
-          <select>
-            <option>Estándar</option><option>Ajustable</option>
-          </select>
-        </label>
-        <button onclick="addToCart('Gorra', 35000)">Añadir al carrito</button>
+        <h3>Selecciona tipo de prenda</h3>
+        <select id="tipo-prenda" onchange="actualizarOpciones()">
+          <option value="camiseta">Camiseta</option>
+          <option value="hoodie">Hoodie</option>
+          <option value="gorra">Gorra</option>
+        </select>
+
+        <div id="opciones-prenda">
+          <!-- Aquí se actualizarán dinámicamente los inputs según el tipo seleccionado -->
+        </div>
+
+        <input type="file" id="diseño" accept="image/*">
+        <button onclick="añadirProductoPersonalizado()">Añadir al carrito</button>
       </div>
     </div>
   </section>
@@ -221,8 +203,45 @@
   <script>
     let cart = [];
 
-    function addToCart(item, price) {
-      cart.push({ item, price });
+    function actualizarOpciones() {
+      const tipo = document.getElementById("tipo-prenda").value;
+      const opciones = document.getElementById("opciones-prenda");
+
+      let html = '';
+      if (tipo === "camiseta" || tipo === "hoodie") {
+        html += `<label>Color:
+          <select id="color">
+            <option>Negro</option><option>Blanco</option><option>Rojo</option><option>Azul</option>
+          </select></label>`;
+        html += `<label>Talla:
+          <select id="talla">
+            <option>S</option><option>M</option><option>L</option><option>XL</option>
+          </select></label>`;
+      } else if (tipo === "gorra") {
+        html += `<label>Color:
+          <select id="color">
+            <option>Negro</option><option>Gris</option><option>Verde</option>
+          </select></label>`;
+        html += `<label>Talla:
+          <select id="talla">
+            <option>Estándar</option><option>Ajustable</option>
+          </select></label>`;
+      }
+      opciones.innerHTML = html;
+    }
+
+    function añadirProductoPersonalizado() {
+      const tipo = document.getElementById("tipo-prenda").value;
+      const color = document.getElementById("color")?.value || "-";
+      const talla = document.getElementById("talla")?.value || "-";
+      const diseño = document.getElementById("diseño").value.split('\\').pop();
+
+      let precio = 0;
+      if (tipo === "camiseta") precio = 45000;
+      else if (tipo === "hoodie") precio = 85000;
+      else if (tipo === "gorra") precio = 35000;
+
+      cart.push({ item: `${tipo.toUpperCase()} - Color: ${color}, Talla: ${talla}, Diseño: ${diseño}`, price: precio });
       renderCart();
     }
 
@@ -233,7 +252,7 @@
       list.innerHTML = "";
 
       let total = 0;
-      cart.forEach((p, i) => {
+      cart.forEach((p) => {
         const li = document.createElement("li");
         li.textContent = `${p.item} - $${p.price.toLocaleString()}`;
         list.appendChild(li);
@@ -242,12 +261,14 @@
       totalSpan.textContent = total.toLocaleString();
 
       const message = encodeURIComponent(
-        `Hola, quiero hacer un pedido:\n` +
+        `Hola, quiero hacer un pedido personalizado:\n` +
         cart.map(p => `• ${p.item} - $${p.price.toLocaleString()}`).join("\n") +
         `\nTotal: $${total.toLocaleString()}\nNombre:\nCiudad:\nDirección:\nCorreo:\nWhatsApp:`
       );
       checkoutBtn.href = `https://wa.me/573508326885?text=${message}`;
     }
+
+    window.onload = actualizarOpciones;
   </script>
 </body>
 </html>
